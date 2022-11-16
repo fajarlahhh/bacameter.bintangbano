@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,8 +11,17 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
+Route::get('/', function () {
+  return "Habit API";
+});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/statusbaca/{pembaca}', function ($pembaca) {
+  $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
+  return \App\Models\StatusBaca::withoutGlobalScopes()->where('pengguna_id', $pembaca->pengguna_id)->get();
+});
+
+Route::get('/targetbaca/{pembaca}', function ($pembaca) {
+  $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
+  return \App\Models\BacaMeter::withoutGlobalScopes()->where('pengguna_id', $pembaca->pengguna_id)->get();
 });

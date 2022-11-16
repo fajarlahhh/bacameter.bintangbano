@@ -17,6 +17,9 @@ class Form extends Component
       'kode' => 'required',
     ]);
 
+    if (!$this->key) {
+      $this->data->uid = Str::random(5);
+    }
     $this->data->nama = strtoupper($this->nama);
     $this->data->kode = $this->kode;
     $this->data->save();

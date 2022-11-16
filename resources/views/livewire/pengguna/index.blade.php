@@ -1,0 +1,94 @@
+<div>
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Pengguna</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Pengguna</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <x-notif.alert />
+      <div class="card card-default">
+        <div class="card-header">
+          <div class="form-inline">
+            <a href="/pengguna/tambah" class="btn text-white btn-primary"><i class="fa fa-plus"></i>
+              Tambah</a>&nbsp;
+            <x-element.select attribute="wire:model=tipe" style="warning">
+              <option value="0">Exist</option>
+              <option value="1">Deleted</option>
+              <option value="2">All</option>
+            </x-element.select>
+            &nbsp;
+            <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
+          </div>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>UID</th>
+                <th>Nama</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($data as $index => $row)
+                <tr>
+                  <td class="align-middle">{{ ++$i }}</td>
+                  <td class="align-middle">{{ $row->uid }}</td>
+                  <td class="align-middle">{{ $row->nama }}</td>
+                  <td class="with-btn-group align-middle text-right" nowrap>
+                    <div class="btn-group btn-group-sm" role="group">
+                      @if ($row->trashed())
+                        @if ($key === $row->getKey())
+                          <button wire:click="restore()" class="btn text-white btn-success">Ya, Restore</button>
+                          <button wire:click="setKey" class="btn text-white btn-danger">Batal</button>
+                        @else
+                          <button wire:click="setKey({{ $row->getKey() }})"
+                            class="btn text-white btn-grey">Restore</button>
+                        @endif
+                      @else
+                        @if ($key === $row->getKey())
+                          <button wire:click="hapus" class="btn text-white btn-warning">Ya, Hapus</button>
+                          <button wire:click="hapusPermanen" class="btn text-white btn-danger">Ya, Hapus
+                            Permanen</button>
+                          <button wire:click="setKey" class="btn text-white btn-success">Batal</button>
+                        @else
+                          <a href="/pengguna/edit/{{ $row->getKey() }}" class="btn text-white btn-info"><i
+                              class="fas fa-sm fa-pencil-alt"></i></a>
+                          <button wire:click="setKey({{ $row->getKey() }})" class="btn text-white btn-danger"><i
+                              class="fas fa-sm fa-trash-alt"></i></button>
+                        @endif
+                      @endif
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-6 col-lg-10 col-xl-10 col-xs-12">
+              {{ $data->links() }}
+            </div>
+            <div class="col-md-6 col-lg-2 col-xl-2 col-xs-12 text-right">
+              Jumlah Data : {{ $data->total() }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

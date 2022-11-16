@@ -1,0 +1,31 @@
+<?php
+
+namespace App\View\Components\Form;
+
+use Illuminate\View\Component;
+
+class File extends Component
+{
+  public $dataFile, $fileDihapus;
+  /**
+   * Create a new component instance.
+   *
+   * @return void
+   */
+  public function __construct($dataFile, $fileDihapus = [])
+  {
+    //
+    $this->dataFile = $dataFile;
+    $this->fileDihapus = $fileDihapus;
+  }
+
+  /**
+   * Get the view / contents that represent the component.
+   *
+   * @return \Illuminate\Contracts\View\View|\Closure|string
+   */
+  public function render()
+  {
+    return view('components.form.file');
+  }
+}

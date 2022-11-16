@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PenggunaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,6 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/', \App\Http\Livewire\Dashboard::class);
   Route::get('/dashboard', \App\Http\Livewire\Dashboard::class)->name('dashboard');
   Route::view('/gantisandi', 'pages.ganti-sandi');
-  Route::patch('/gantisandi', [PenggunaController::class, 'simpan_sandi'])->name('gantisandi');
 
   Route::group(['middleware' => ['admin']], function () {
     Route::prefix('pengguna')->group(function () {

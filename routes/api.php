@@ -32,7 +32,7 @@ Route::middleware(['cors'])->get('/targetbaca/{pembaca}/{periode}', function ($p
   $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
   return response()->json([
     'status' => 'sukses',
-    'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $periode)->where('pengguna_id', $pembaca->pengguna_id)->get(),
+    'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $periode)->where('pembaca_kode', $pembaca)->where('pengguna_id', $pembaca->pengguna_id)->get(),
   ]);
 });
 

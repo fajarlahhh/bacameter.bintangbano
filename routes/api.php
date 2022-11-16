@@ -28,11 +28,11 @@ Route::middleware(['cors'])->get('/statusbaca/{pembaca}', function ($pembaca) {
   ]);
 });
 
-Route::middleware(['cors'])->get('/targetbaca/{pembaca}', function ($pembaca) {
+Route::middleware(['cors'])->get('/targetbaca/{pembaca}/{periode}', function ($pembaca, $periode) {
   $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
   return response()->json([
     'status' => 'sukses',
-    'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('pengguna_id', $pembaca->pengguna_id)->get(),
+    'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $periode)->where('pengguna_id', $pembaca->pengguna_id)->get(),
   ]);
 });
 

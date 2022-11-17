@@ -7,7 +7,7 @@ use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BacameterController extends Controller
+class PenagihanController extends Controller
 {
   //
   public function index(Request $req)

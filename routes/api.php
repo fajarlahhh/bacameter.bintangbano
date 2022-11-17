@@ -30,14 +30,6 @@ Route::middleware(['cors'])->post('/statusbaca/{pembaca}', function ($pembaca) {
   ]);
 });
 
-Route::middleware(['cors'])->post('/bacameter/target/{pembaca}/{periode}', function ($pembaca, $periode) {
-  $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
-  return response()->json([
-    'status' => 'sukses',
-    'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $periode)->where('pembaca_kode', $pembaca)->where('pengguna_id', $pembaca->pengguna_id)->get(),
-  ]);
-});
-
 Route::middleware(['cors'])->post('/penagihan/target/{pembaca}', function ($pembaca, $periode) {
   $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
   return response()->json([

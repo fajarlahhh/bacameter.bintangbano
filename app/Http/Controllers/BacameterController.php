@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BacaMeter;
+use App\Models\Pembaca;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,28 @@ use Illuminate\Support\Facades\Validator;
 class BacameterController extends Controller
 {
   //
+  public function index(Request $req)
+  {
+    $validator = Validator::make($req->all(), [
+      'pembaca' => 'required',
+      'periode' => 'required',
+    ]);
+    if ($validator->fails()) {
+      return response()->json([
+        'status' => 'gagal',
+        'data' => $validator->messages(),
+      ]);
+    }
+
+    $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
+    if ($pembaca->count() > 0) {
+      return response()->json([
+        'status' => 'sukses',
+        'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $req->periode)->where('pembaca_kode', $pembaca)->where('pengguna_id', $pembaca->pengguna_id)->get(),
+      ]);
+    }
+  }
+
   public function upload(Request $req)
   {
     $validator = Validator::make($req->all(), [

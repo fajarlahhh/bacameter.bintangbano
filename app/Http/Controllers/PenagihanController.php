@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BacaMeter;
+use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,8 +23,9 @@ class BacameterController extends Controller
         'data' => $validator->messages(),
       ]);
     }
+
     try {
-      BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
+      Tagihan::where('id', $req->id)->withoutGlobalScopes()->update([
         'tanggal_tagih' => $req->tanggal_tagih,
         'latitude' => $req->latitude,
         'longitude' => $req->longitude,

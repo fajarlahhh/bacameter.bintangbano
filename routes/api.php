@@ -49,4 +49,5 @@ Route::middleware(['cors'])->post('/login', [PembacaController::class, 'login'])
 
 Route::middleware(['cors'])->post('/statusbaca', [StatusbacaController::class, 'index']);
 Route::middleware(['cors'])->post('/bacameter/upload/{pembaca}', [BacameterController::class, 'upload']);
+Route::middleware(['cors'])->post('/bacameter/target', [BacameterController::class, 'upload']);
 Route::middleware(['cors'])->post('/penagihan/lunasi/{pembaca}', [PenagihanController::class, 'lunasi']);

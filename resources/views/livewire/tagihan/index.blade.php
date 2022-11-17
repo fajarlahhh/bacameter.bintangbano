@@ -21,23 +21,6 @@
       <div class="card card-default">
         <div class="card-header">
           <div class="form-inline">
-            <div class="form-group">
-              <select class="form-control " wire:model="bulan" data-live-search="true" data-style="btn-info"
-                data-width="100%">
-                @for ($i = 1; $i <= 12; $i++)
-                  <option value="{{ sprintf('%02s', $i) }}">{{ DateTime::createFromFormat('!m', $i)->format('F') }}
-                  </option>
-                @endfor
-              </select>
-            </div>&nbsp;
-            <div class="form-group">
-              <select class="form-control " wire:model="tahun" data-live-search="true" data-style="btn-info"
-                data-width="100%">
-                @for ($i = 2016; $i <= date('Y'); $i++)
-                  <option value="{{ $i }}">{{ $i }}</option>
-                @endfor
-              </select>
-            </div>&nbsp;
             <x-element.select attribute="wire:model=pembaca" style="warning">
               <option value="">-- Semua Petugas --</option>
               @foreach (\App\Models\Pembaca::orderBy('nama')->get() as $row)
@@ -45,18 +28,10 @@
               @endforeach
             </x-element.select>&nbsp;
             <x-element.select attribute="wire:model=status" style="warning">
-              <option value="0">Belum Baca</option>
-              <option value="1">Terbaca</option>
+              <option value="0">Belum Ditagih</option>
+              <option value="1">Tertagih</option>
             </x-element.select>
             &nbsp;
-            @if ($status == 1)
-              <x-element.select attribute="wire:model=statusBaca" style="warning">
-                <option value="">-- Semua Status Baca --</option>
-                @foreach (\App\Models\StatusBaca::orderBy('keterangan')->get() as $row)
-                  <option value="{{ $row->keterangan }}">{{ $row->keterangan }}</option>
-                @endforeach
-              </x-element.select>&nbsp;
-            @endif
             <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
           </div>
         </div>
@@ -68,10 +43,10 @@
                 <th>No. Langganan</th>
                 <th>Nama</th>
                 <th>Alamat</th>
-                <th>Stand Ini</th>
-                <th>Status Baca</th>
-                <th>Tanggal Baca</th>
-                <th>Foto</th>
+                <th>Periode</th>
+                <th>Jumlah</th>
+                <th>Denda</th>
+                <th>Tanggal Tagih</th>
               </tr>
             </thead>
             <tbody>
@@ -81,14 +56,10 @@
                   <td class="align-middle">{{ $row->no_langganan }}</td>
                   <td class="align-middle">{{ $row->nama }}</td>
                   <td class="align-middle">{{ $row->alamat }}</td>
-                  <td class="align-middle">{{ $row->stand_ini }}</td>
-                  <td class="align-middle">{{ $row->status_baca }}</td>
-                  <td class="align-middle">{{ $row->tanggal_baca }}</td>
-                  <td class="align-middle">
-                    <a href="{{ $row->foto }}">
-                      <img src="{{ $row->foto }}" alt="" class="width-100">
-                    </a>
-                  </td>
+                  <td class="align-middle">{{ $row->periode }}</td>
+                  <td class="align-middle">{{ $row->jumlah }}</td>
+                  <td class="align-middle">{{ $row->denda }}</td>
+                  <td class="align-middle">{{ $row->tanggal_tagih }}</td>
                 </tr>
               @endforeach
             </tbody>

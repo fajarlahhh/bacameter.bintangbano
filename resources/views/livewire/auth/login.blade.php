@@ -3,7 +3,10 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="../../index2.html" class="h1"><b>HA</b>BIT</a>
+        <img src="/dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+          style="opacity: .8; width:30%">
+        <br>
+        <a href="/" class="h2"><b>HA</b>BIT</a>
       </div>
       <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -39,6 +42,11 @@
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div>
             <!-- /.col -->
+          </div>
+          <hr>
+          <div class="text-center">
+            <small><strong>Copyright &copy; 2022</strong>
+              All rights reserved.</small>
           </div>
         </form>
       </div>

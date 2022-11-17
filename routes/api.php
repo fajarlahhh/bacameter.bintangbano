@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BacameterController;
+use App\Http\Controllers\StatusbacaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ Route::middleware(['cors'])->get('/', function () {
   ]);
 });
 
-Route::middleware(['cors'])->get('/statusbaca/{pembaca}', function ($pembaca) {
+Route::middleware(['cors'])->post('/statusbaca/{pembaca}', function ($pembaca) {
   $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
   return response()->json([
     'status' => 'sukses',
@@ -28,7 +29,7 @@ Route::middleware(['cors'])->get('/statusbaca/{pembaca}', function ($pembaca) {
   ]);
 });
 
-Route::middleware(['cors'])->get('/targetbaca/{pembaca}/{periode}', function ($pembaca, $periode) {
+Route::middleware(['cors'])->post('/bacameter/target/{pembaca}/{periode}', function ($pembaca, $periode) {
   $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
   return response()->json([
     'status' => 'sukses',
@@ -36,4 +37,15 @@ Route::middleware(['cors'])->get('/targetbaca/{pembaca}/{periode}', function ($p
   ]);
 });
 
-Route::middleware(['cors'])->post('/upload/{pembaca}', [BacameterController::class, 'upload']);
+Route::middleware(['cors'])->post('/penagihan/target/{pembaca}', function ($pembaca, $periode) {
+  $pembaca = \App\Models\Pembaca::where('uid', $pembaca)->withoutGlobalScopes()->first();
+  return response()->json([
+    'status' => 'sukses',
+    'data' => \App\Models\Tagihan::withoutGlobalScopes()->where('pembaca_kode', $pembaca)->where('pengguna_id', $pembaca->pengguna_id)->get(),
+  ]);
+});
+Route::middleware(['cors'])->post('/login', [StatusbacaController::class, 'index']);
+
+Route::middleware(['cors'])->post('/statusbaca', [StatusbacaController::class, 'index']);
+Route::middleware(['cors'])->post('/bacameter/upload/{pembaca}', [BacameterController::class, 'upload']);
+Route::middleware(['cors'])->post('/penagihan/lunasi/{pembaca}', [PenagihanController::class, 'lunasi']);

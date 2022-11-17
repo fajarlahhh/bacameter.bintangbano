@@ -25,13 +25,13 @@
               <h5 class="widget-user-desc">{{ auth()->user()->perusahaan }}</h5>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+              <img class="img-circle elevation-2" src="/dist/img/logo.png">
             </div>
             <div class="card-footer">
               <div class="row">
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
+                    <h5 class="description-header">{{ \App\Models\Pembaca::all()->count() }}</h5>
                     <span class="description-text">PEMBACA</span>
                   </div>
                   <!-- /.description-block -->
@@ -39,16 +39,16 @@
                 <!-- /.col -->
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
+                    <h5 class="description-header">{{ \App\Models\BacaMeter::whereNull('tanggal_baca')->count() }}</h5>
+                    <span class="description-text">BACA METER</span>
                   </div>
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-4">
                   <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
+                    <h5 class="description-header">{{ \App\Models\Tagihan::whereNull('tanggal_tagih')->count() }}</h5>
+                    <span class="description-text">PENAGIHAN</span>
                   </div>
                   <!-- /.description-block -->
                 </div>

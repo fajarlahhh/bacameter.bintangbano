@@ -24,10 +24,9 @@ class PembacaController extends Controller
 
     $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
     if ($pembaca->count() > 0) {
-
       return response()->json([
         'status' => 'sukses',
-        'data' => [],
+        'data' => $pembaca,
       ]);
     }
     return response()->json([

@@ -26,7 +26,7 @@ class PembacaController extends Controller
     if ($pembaca->count() > 0) {
 
       return response()->json([
-        'status' => 'gagal',
+        'status' => 'sukses',
         'data' => [],
       ]);
     }

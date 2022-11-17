@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BacameterController;
+use App\Http\Controllers\PembacaController;
 use App\Http\Controllers\StatusbacaController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +45,7 @@ Route::middleware(['cors'])->post('/penagihan/target/{pembaca}', function ($pemb
     'data' => \App\Models\Tagihan::withoutGlobalScopes()->where('pembaca_kode', $pembaca)->where('pengguna_id', $pembaca->pengguna_id)->get(),
   ]);
 });
-Route::middleware(['cors'])->post('/login', [StatusbacaController::class, 'index']);
+Route::middleware(['cors'])->post('/login', [PembacaController::class, 'login']);
 
 Route::middleware(['cors'])->post('/statusbaca', [StatusbacaController::class, 'index']);
 Route::middleware(['cors'])->post('/bacameter/upload/{pembaca}', [BacameterController::class, 'upload']);

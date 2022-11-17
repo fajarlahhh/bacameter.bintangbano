@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BacameterController;
 use App\Http\Controllers\PembacaController;
+use App\Http\Controllers\PenagihanController;
 use App\Http\Controllers\StatusbacaController;
 use Illuminate\Support\Facades\Route;
 

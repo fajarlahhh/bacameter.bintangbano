@@ -28,7 +28,7 @@ class BacameterController extends Controller
     if ($pembaca->count() > 0) {
       return response()->json([
         'status' => 'sukses',
-        'data' => \App\Models\BacaMeter::withoutGlobalScopes()->where('periode', $req->periode)->where('pembaca_kode', $pembaca->first()->kode)->get(),
+        'data' => BacaMeter::withoutGlobalScopes()->where('periode', $req->periode)->where('pembaca_kode', $pembaca->first()->kode)->get(),
       ]);
     }
   }

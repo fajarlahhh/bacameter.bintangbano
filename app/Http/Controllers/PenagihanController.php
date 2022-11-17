@@ -29,6 +29,10 @@ class PenagihanController extends Controller
         'data' => Tagihan::withoutGlobalScopes()->where('pembaca_kode', $pembaca->first()->kode)->get(),
       ]);
     }
+    return response()->json([
+      'status' => 'gagal',
+      'data' => 'Tidak ada data petugas',
+    ]);
   }
 
   public function lunasi(Request $req)
@@ -47,15 +51,21 @@ class PenagihanController extends Controller
     }
 
     try {
-      Tagihan::where('id', $req->id)->withoutGlobalScopes()->update([
+      if (Tagihan::where('id', $req->id)->withoutGlobalScopes()->update([
         'tanggal_tagih' => $req->tanggal_tagih,
         'latitude' => $req->latitude,
         'longitude' => $req->longitude,
-      ]);
-      return response()->json([
-        'status' => 'sukses',
-        'data' => null,
-      ]);
+      ])) {
+        return response()->json([
+          'status' => 'sukses',
+          'data' => null,
+        ]);
+      } else {
+        return response()->json([
+          'status' => 'gagal',
+          'data' => 'Tidak ada data tagihan',
+        ]);
+      }
     } catch (\Exception$e) {
       return response()->json([
         'status' => 'gagal',

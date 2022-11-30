@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\BacaMeter;
 use App\Models\Pembaca;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BacameterController extends Controller
@@ -54,10 +53,10 @@ class BacameterController extends Controller
       $gambar = $req->file('file');
       $extension = $gambar->getClientOriginalExtension();
       $namaFile = date('YmdHims') . time() . uniqid() . '_' . $req->id;
-      Storage::disk('local')->putFileAs('public/foto', $gambar, $namaFile . '.' . $extension);
+      $gambar->move(public_path('foto'), $namaFile);
       BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
         'stand_ini' => $req->stand,
-        'status_baca' => $req->stand,
+        'status_baca' => $req->status_baca,
         'tanggal_baca' => $req->tanggal_baca,
         'latitude' => $req->latitude,
         'longitude' => $req->longitude,

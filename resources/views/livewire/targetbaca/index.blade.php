@@ -1,4 +1,27 @@
 <div>
+  @push('css')
+    <style>
+      .zoom-without-container {
+        transition: transform .2s;
+        /* Animation */
+        margin: 0 auto;
+      }
+
+      .zoom-without-container img {
+        width: 100%;
+        height: auto;
+      }
+
+      .zoom-without-container:active {
+        transform: scale(10);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        z-index: 3000;
+        position: absolute;
+        padding-top: 30px;
+        padding-bottom: 20px;
+      }
+    </style>
+  @endpush
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -69,9 +92,9 @@
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>Stand Ini</th>
+                <th>Foto</th>
                 <th>Status Baca</th>
                 <th>Tanggal Baca</th>
-                <th>Foto</th>
               </tr>
             </thead>
             <tbody>
@@ -82,13 +105,14 @@
                   <td class="align-middle">{{ $row->nama }}</td>
                   <td class="align-middle">{{ $row->alamat }}</td>
                   <td class="align-middle">{{ $row->stand_ini }}</td>
+                  <td class="align-middle">{!! $row->foto
+                      ? "<div class='zoom-without-container'><img src='" .
+                          URL::asset('storage/' . $row->foto) .
+                          "'  alt='zoom' style='width:50px'></div>"
+                      : null !!}
+                  </td>
                   <td class="align-middle">{{ $row->status_baca }}</td>
                   <td class="align-middle">{{ $row->tanggal_baca }}</td>
-                  <td class="align-middle">
-                    <a href="{{ URL::asset('storage/' . $row->foto) }}">
-                      <img src="{{ URL::asset('storage/' . $row->foto) }}" alt="" class="width-100">
-                    </a>
-                  </td>
                 </tr>
               @endforeach
             </tbody>

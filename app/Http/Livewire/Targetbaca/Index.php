@@ -13,7 +13,7 @@ class Index extends Component
   public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari;
   protected $paginationTheme = 'bootstrap';
 
-  protected $queryString = ['bulan', 'tahun'];
+  protected $queryString = ['bulan', 'tahun', 'status', 'pembaca', 'cari'];
 
   public function mount()
   {

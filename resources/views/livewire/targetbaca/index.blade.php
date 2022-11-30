@@ -85,8 +85,8 @@
                   <td class="align-middle">{{ $row->status_baca }}</td>
                   <td class="align-middle">{{ $row->tanggal_baca }}</td>
                   <td class="align-middle">
-                    <a href="{{ $row->foto }}">
-                      <img src="{{ $row->foto }}" alt="" class="width-100">
+                    <a href="{{ URL::asset('storage/' . $row->foto) }}">
+                      <img src="{{ URL::asset('storage/' . $row->foto) }}" alt="" class="width-100">
                     </a>
                   </td>
                 </tr>

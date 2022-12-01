@@ -60,7 +60,7 @@ class BacameterController extends Controller
         'tanggal_baca' => $req->tanggal_baca,
         'latitude' => $req->latitude,
         'longitude' => $req->longitude,
-        'foto' => 'foto/' . $namaFile . '.' . $extension,
+        'foto' => 'public/foto/' . $namaFile . '.' . $extension,
       ]);
       return response()->json([
         'status' => 'sukses',

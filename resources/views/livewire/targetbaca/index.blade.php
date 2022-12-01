@@ -107,7 +107,7 @@
                   <td class="align-middle">{{ $row->stand_ini }}</td>
                   <td class="align-middle">{!! $row->foto
                       ? "<div class='zoom-without-container'><img src='" .
-                          URL::asset('storage/' . $row->foto) .
+                          URL::asset($row->foto) .
                           "'  alt='zoom' style='width:50px'></div>"
                       : null !!}
                   </td>

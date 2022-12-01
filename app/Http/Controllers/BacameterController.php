@@ -53,7 +53,7 @@ class BacameterController extends Controller
       $gambar = $req->file('file');
       $extension = $gambar->getClientOriginalExtension();
       $namaFile = date('YmdHims') . time() . uniqid() . '_' . $req->id;
-      $gambar->move(public_path('foto'), $namaFile);
+      $gambar->move(public_path('foto'), $namaFile . '.' . $extension);
       BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
         'stand_ini' => $req->stand,
         'status_baca' => $req->status_baca,

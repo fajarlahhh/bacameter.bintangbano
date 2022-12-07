@@ -41,4 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
   Route::prefix('penagihan')->group(function () {
     Route::get('/', \App\Http\Livewire\Tagihan\Index::class);
   });
+  Route::prefix('import')->group(function () {
+    Route::get('/', \App\Http\Livewire\Import::class);
+  });
 });

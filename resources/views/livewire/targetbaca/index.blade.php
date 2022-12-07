@@ -81,6 +81,8 @@
               </x-element.select>&nbsp;
             @endif
             <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
+            &nbsp;
+            <button class="btn btn-success" wire:click="export">Export</button>
           </div>
         </div>
         <div class="card-body table-responsive">

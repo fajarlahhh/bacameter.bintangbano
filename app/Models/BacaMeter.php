@@ -13,6 +13,10 @@ class BacaMeter extends Model
 
   protected $table = 'baca_meter';
 
+  protected $fillable = [
+    'pengguna_id', 'no_langganan', 'nama', 'alamat', 'periode', 'pembaca_kode',
+  ];
+
   protected static function boot()
   {
     parent::boot();

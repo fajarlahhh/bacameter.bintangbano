@@ -60,6 +60,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="/import" class="nav-link  @if (strpos($currentUrl, '/import') === 0) active @endif">
+                <i class="nav-icon fas fa-file-import"></i>
+                Import
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="/pembaca" class="nav-link  @if (strpos($currentUrl, '/pembaca') === 0) active @endif">
                 <i class="nav-icon fas fa-user-tag"></i>
                 Pembaca
@@ -74,15 +80,15 @@
               </li>
             @endif
             <li class="nav-item">
-              <a href="/statusbaca" class="nav-link  @if (strpos($currentUrl, '/statusbaca') === 0) active @endif">
-                <i class="nav-icon fas fa-clipboard-check"></i>
-                Status Baca
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="/penagihan" class="nav-link  @if (strpos($currentUrl, '/penagihan') === 0) active @endif">
                 <i class="nav-icon fas fa-money-bill"></i>
                 Penagihan
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/statusbaca" class="nav-link  @if (strpos($currentUrl, '/statusbaca') === 0) active @endif">
+                <i class="nav-icon fas fa-clipboard-check"></i>
+                Status Baca
               </a>
             </li>
             <li class="nav-item">

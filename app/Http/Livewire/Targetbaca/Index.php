@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Targetbaca;
 
+use App\Exports\BacameterExport;
 use App\Models\BacaMeter;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -13,7 +15,7 @@ class Index extends Component
   public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari;
   protected $paginationTheme = 'bootstrap';
 
-  protected $queryString = ['bulan', 'tahun', 'status', 'pembaca', 'cari'];
+  protected $queryString = ['bulan', 'tahun', 'status', 'pembaca', 'cari', 'statusBaca'];
 
   public function mount()
   {
@@ -24,6 +26,12 @@ class Index extends Component
   public function updated()
   {
     $this->resetPage();
+  }
+
+  public function export()
+  {
+    $this->emit('reinitialize');
+    return Excel::download(new BacameterExport($this->cari, $this->status, $this->statusBaca, $this->pembaca, $this->tahun, $this->bulan), 'Data Baca Meter - ' . $this->tahun . $this->bulan . '.xlsx');
   }
 
   public function render()

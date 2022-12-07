@@ -28,6 +28,7 @@
                   <input type="file" class="form-control" wire:model="file" required
                     accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                 </div>
+                <a href="/dist/databacameter.xlsx" class="btn btn-primary">Download Template</a>&nbsp;
                 <input type="submit" value="Submit" class="btn btn-success">
               </form>
             </div>

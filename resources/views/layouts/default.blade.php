@@ -74,12 +74,6 @@
               </li>
             @endif
             <li class="nav-item">
-              <a href="/penagihan" class="nav-link  @if (strpos($currentUrl, '/penagihan') === 0) active @endif">
-                <i class="nav-icon fas fa-money-bill"></i>
-                Penagihan
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="/statusbaca" class="nav-link  @if (strpos($currentUrl, '/statusbaca') === 0) active @endif">
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 Status Baca
@@ -89,6 +83,12 @@
               <a href="/targetbaca" class="nav-link  @if (strpos($currentUrl, '/targetbaca') === 0) active @endif">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 Target Baca
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/targetpenagihan" class="nav-link  @if (strpos($currentUrl, '/targetpenagihan') === 0) active @endif">
+                <i class="nav-icon fas fa-money-bill"></i>
+                Target Penagihan
               </a>
             </li>
             <hr>

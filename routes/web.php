@@ -37,11 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
   });
   Route::prefix('targetbaca')->group(function () {
     Route::get('/', \App\Http\Livewire\Targetbaca\Index::class);
+    Route::get('/import', \App\Http\Livewire\Targetbaca\Import::class);
   });
   Route::prefix('penagihan')->group(function () {
     Route::get('/', \App\Http\Livewire\Tagihan\Index::class);
-  });
-  Route::prefix('import')->group(function () {
-    Route::get('/', \App\Http\Livewire\Import::class);
   });
 });

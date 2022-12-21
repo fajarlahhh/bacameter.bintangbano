@@ -60,12 +60,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/import" class="nav-link  @if (strpos($currentUrl, '/import') === 0) active @endif">
-                <i class="nav-icon fas fa-file-import"></i>
-                Import
-              </a>
-            </li>
-            <li class="nav-item">
               <a href="/pembaca" class="nav-link  @if (strpos($currentUrl, '/pembaca') === 0) active @endif">
                 <i class="nav-icon fas fa-user-tag"></i>
                 Pembaca

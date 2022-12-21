@@ -82,7 +82,8 @@
             @endif
             <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
             &nbsp;
-            <button class="btn btn-success" wire:click="export">Export</button>
+            <button class="btn btn-success" wire:click="export">Export</button>&nbsp;
+            <a class="btn btn-warning" href="/targetbaca/import">Import</a>
           </div>
         </div>
         <div class="card-body table-responsive">

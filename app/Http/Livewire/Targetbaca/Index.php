@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Targetbaca;
 
 use App\Exports\BacameterExport;
 use App\Models\BacaMeter;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,7 +13,7 @@ class Index extends Component
 {
   use WithPagination;
 
-  public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari;
+  public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari, $hapus;
   protected $paginationTheme = 'bootstrap';
 
   protected $queryString = ['bulan', 'tahun', 'status', 'pembaca', 'cari', 'statusBaca'];
@@ -21,6 +22,19 @@ class Index extends Component
   {
     $this->bulan = $this->bulan ?: date('m');
     $this->tahun = $this->tahun ?: date('Y');
+  }
+
+  public function setHapus($hapus = null)
+  {
+    $this->hapus = $hapus;
+  }
+
+  public function hapus()
+  {
+    $data = BacaMeter::findOrFail($this->hapus);
+    File::delete($data->foto);
+    $data->delete();
+    $this->hapus = null;
   }
 
   public function updated()

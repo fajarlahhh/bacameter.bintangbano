@@ -98,6 +98,9 @@
                 <th>Foto</th>
                 <th>Status Baca</th>
                 <th>Tanggal Baca</th>
+                @if ($status == 1)
+                  <th></th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -116,6 +119,18 @@
                   </td>
                   <td class="align-middle">{{ $row->status_baca }}</td>
                   <td class="align-middle">{{ $row->tanggal_baca }}</td>
+                  @if ($status == 1)
+                    <td>
+                      @if ($hapus == $row->getKey())
+                        <a href="javascript:;" wire:click="hapus" class="btn btn-danger">Ya,
+                          Reset</a>
+                        <a href="javascript:;" wire:click="setHapus" class="btn btn-success">Batal</a>
+                      @else
+                        <a href="javascript:;" wire:click="setHapus({{ $row->getKey() }})"
+                          class="btn btn-danger">Reset</a>
+                      @endif
+                    </td>
+                  @endif
                 </tr>
               @endforeach
             </tbody>

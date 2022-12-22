@@ -23,7 +23,7 @@ class PenagihanController extends Controller
 
     return response()->json([
       'status' => 'sukses',
-      'data' => Tagihan::where('nama', $req->cari)->orWhere('no_langganan', $req->cari)->get(),
+      'data' => Tagihan::where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%')->get(),
     ]);
   }
 

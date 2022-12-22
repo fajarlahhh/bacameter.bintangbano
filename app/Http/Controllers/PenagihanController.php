@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pembaca;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,16 +21,9 @@ class PenagihanController extends Controller
       ]);
     }
 
-    $pembaca = Pembaca::where('nama', $req->cari)->orWhere('no_langganan', $req->cari)->withoutGlobalScopes()->get();
-    if ($pembaca->count() > 0) {
-      return response()->json([
-        'status' => 'sukses',
-        'data' => Tagihan::withoutGlobalScopes()->where('pembaca_kode', $pembaca->first()->kode)->get(),
-      ]);
-    }
     return response()->json([
-      'status' => 'gagal',
-      'data' => 'Tidak ada data petugas',
+      'status' => 'sukses',
+      'data' => Tagihan::where('nama', $req->cari)->orWhere('no_langganan', $req->cari)->get(),
     ]);
   }
 

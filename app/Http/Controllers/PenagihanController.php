@@ -13,7 +13,7 @@ class PenagihanController extends Controller
   public function index(Request $req)
   {
     $validator = Validator::make($req->all(), [
-      'pembaca' => 'required',
+      'cari' => 'required',
     ]);
     if ($validator->fails()) {
       return response()->json([
@@ -22,7 +22,7 @@ class PenagihanController extends Controller
       ]);
     }
 
-    $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
+    $pembaca = Pembaca::where('nama', $req->cari)->orWhere('no_langganan', $req->cari)->withoutGlobalScopes()->get();
     if ($pembaca->count() > 0) {
       return response()->json([
         'status' => 'sukses',

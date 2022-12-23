@@ -31,7 +31,6 @@ class PenagihanController extends Controller
     {
         $validator = Validator::make($req->all(), [
             'id' => 'required',
-            'tanggal_tagih' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -41,8 +40,8 @@ class PenagihanController extends Controller
         }
 
         try {
-            Tagihan::where('id', $req->id)->withoutGlobalScopes()->update([
-                'tanggal_tagih' => $req->tanggal_tagih,
+            Tagihan::whereIn('id', $req->id)->withoutGlobalScopes()->update([
+                'tanggal_tagih' => now(),
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,
             ]);

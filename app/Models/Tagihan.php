@@ -14,6 +14,6 @@ class Tagihan extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('jumlah', 'denda', 'periode', 'id');
+        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('no_langganan', 'jumlah', 'denda', 'periode', 'id');
     }
 }

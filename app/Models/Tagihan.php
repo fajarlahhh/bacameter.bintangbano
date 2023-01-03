@@ -15,6 +15,6 @@ class Tagihan extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('no_langganan', 'jumlah', 'denda', 'periode', DB::raw('(NOW()) tanggal'), 'id');
+        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('no_langganan', 'jumlah', 'periode', DB::raw('if(date(DATE_ADD(NOW(), INTERVAL 1 HOUR)) > concat(SUBSTR(periode, 1, 8), "25"), 5000, 0) denda'), 'id');
     }
 }

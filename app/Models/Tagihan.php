@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Pengguna;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Tagihan extends Model
 {
@@ -14,6 +15,6 @@ class Tagihan extends Model
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('no_langganan', 'jumlah', 'denda', 'periode', 'id');
+        return $this->hasMany(Tagihan::class, 'no_langganan', 'no_langganan')->select('no_langganan', 'jumlah', 'denda', 'periode', DB::raw('(NOW()) tanggal'), 'id');
     }
 }

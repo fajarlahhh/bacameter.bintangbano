@@ -44,7 +44,7 @@ class PenagihanController extends Controller
         $tanggal = explode(' - ', $req->tanggal);
         return response()->json([
             'status' => 'sukses',
-            'data' => Tagihan::whereBetween('tanggal_bayar', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+            'data' => Tagihan::whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
         ]);
     }
 

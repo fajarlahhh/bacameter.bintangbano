@@ -28,6 +28,26 @@ class PenagihanController extends Controller
         ]);
     }
 
+    public function terbayar(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'petugas' => 'required',
+            'tanggal' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'gagal',
+                'data' => $validator->messages(),
+            ]);
+        }
+
+        $tanggal = explode(' - ', $req->tanggal);
+        return response()->json([
+            'status' => 'sukses',
+            'data' => Tagihan::whereBetween('tanggal_bayar', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+        ]);
+    }
+
     public function lunasi(Request $req)
     {
         $validator = Validator::make($req->all(), [

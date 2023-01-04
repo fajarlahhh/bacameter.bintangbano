@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tagihan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +43,7 @@ class PenagihanController extends Controller
         try {
             Tagihan::whereIn('id', $req->id)->withoutGlobalScopes()->update([
                 'tanggal_tagih' => now(),
+                'denda' => Carbon::now()->addHours(1)->format('Ymd') > Carbon::now()->addHours(1)->format('Ym25') ? 5000 : 0,
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,
             ]);

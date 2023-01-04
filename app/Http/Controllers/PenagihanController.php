@@ -43,7 +43,7 @@ class PenagihanController extends Controller
 
         try {
             Tagihan::whereIn('id', $req->id)->withoutGlobalScopes()->update([
-                'pembaca_kode' => now(),
+                'pembaca_kode' => $req->petugas,
                 'tanggal_tagih' => now(),
                 'denda' => Carbon::now()->addHours(1)->format('Ymd') > Carbon::now()->addHours(1)->format('Ym25') ? 5000 : 0,
                 'latitude' => $req->latitude,

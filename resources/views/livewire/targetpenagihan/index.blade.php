@@ -27,6 +27,24 @@
                         </x-element.select>
                         &nbsp;
                         @if ($status == 1)
+                            <div class="form-group">
+                                <select class="form-control " wire:model="bulan" data-live-search="true"
+                                    data-style="btn-info" data-width="100%">
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <option value="{{ sprintf('%02s', $i) }}">
+                                            {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>&nbsp;
+                            <div class="form-group">
+                                <select class="form-control " wire:model="tahun" data-live-search="true"
+                                    data-style="btn-info" data-width="100%">
+                                    @for ($i = 2016; $i <= date('Y'); $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>&nbsp;
                             <x-element.select attribute="wire:model=pembaca" style="warning">
                                 <option value="">-- Semua Petugas --</option>
                                 @foreach (\App\Models\Pembaca::orderBy('nama')->get() as $row)
@@ -35,6 +53,9 @@
                             </x-element.select>&nbsp;
                         @endif
                         <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
+                        &nbsp;
+                        <button class="btn btn-success" wire:click="export">Export</button>&nbsp;
+                        <a class="btn btn-warning" href="/targetpenagihan/import">Import</a>
                     </div>
                 </div>
                 <div class="card-body table-responsive">

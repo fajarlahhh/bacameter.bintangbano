@@ -69,8 +69,8 @@
                                 <th>Periode</th>
                                 <th>Jumlah</th>
                                 <th>Denda</th>
-                                <th>Tanggal Tagih</th>
                                 @if ($status == 1)
+                                    <th>Tanggal Tagih</th>
                                     <th>Petugas</th>
                                     <th></th>
                                 @endif
@@ -86,8 +86,8 @@
                                     <td class="align-middle">{{ $row->periode }}</td>
                                     <td class="align-middle">{{ $row->jumlah }}</td>
                                     <td class="align-middle">{{ $row->denda }}</td>
-                                    <td class="align-middle">{{ $row->tanggal_tagih }}</td>
                                     @if ($status == 1)
+                                        <td class="align-middle">{{ $row->tanggal_tagih }}</td>
                                         <td class="align-middle">{{ $row->penagih->nama }}</td>
                                         <td>
                                             @if ($hapus == $row->getKey())

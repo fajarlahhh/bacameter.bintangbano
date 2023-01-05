@@ -13,7 +13,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $bulan, $tahun, $status = 0, $pembaca, $cari, $hapus;
+    public $bulan, $tahun, $status = 0, $pembaca, $cari, $hapus, $reset;
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = ['bulan', 'tahun', 'pembaca', 'status', 'cari'];
@@ -23,12 +23,23 @@ class Index extends Component
         $this->hapus = $hapus;
     }
 
-    public function hapus()
+    public function setReset($reset = null)
     {
-        $data = Tagihan::findOrFail($this->hapus);
+        $this->reset = $reset;
+    }
+
+    public function ulangi()
+    {
+        $data = Tagihan::findOrFail($this->reset);
         $data->pembaca_kode = null;
         $data->tanggal_tagih = null;
         $data->save();
+        $this->reset = null;
+    }
+
+    public function hapus()
+    {
+        Tagihan::whereId($this->hapus)->delete();
         $this->hapus = null;
     }
 

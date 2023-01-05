@@ -72,8 +72,8 @@
                                 @if ($status == 1)
                                     <th>Tanggal Tagih</th>
                                     <th>Petugas</th>
-                                    <th></th>
                                 @endif
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,6 +89,18 @@
                                     @if ($status == 1)
                                         <td class="align-middle">{{ $row->tanggal_tagih }}</td>
                                         <td class="align-middle">{{ $row->penagih->nama }}</td>
+                                        <td>
+                                            @if ($reset == $row->getKey())
+                                                <a href="javascript:;" wire:click="ulangi" class="btn btn-danger">Ya,
+                                                    Reset</a>
+                                                <a href="javascript:;" wire:click="setReset"
+                                                    class="btn btn-success">Batal</a>
+                                            @else
+                                                <a href="javascript:;" wire:click="setReset({{ $row->getKey() }})"
+                                                    class="btn btn-danger">Reset</a>
+                                            @endif
+                                        </td>
+                                    @else
                                         <td>
                                             @if ($hapus == $row->getKey())
                                                 <a href="javascript:;" wire:click="hapus" class="btn btn-danger">Ya,

@@ -13,7 +13,7 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari, $hapus;
+    public $bulan, $tahun, $status = 0, $statusBaca, $pembaca, $cari, $hapus, $reset;
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = ['bulan', 'tahun', 'status', 'pembaca', 'cari', 'statusBaca'];
@@ -29,15 +29,26 @@ class Index extends Component
         $this->hapus = $hapus;
     }
 
-    public function hapus()
+    public function setReset($reset = null)
     {
-        $data = BacaMeter::findOrFail($this->hapus);
+        $this->reset = $reset;
+    }
+
+    public function ulangi()
+    {
+        $data = BacaMeter::findOrFail($this->reset);
         File::delete($data->foto);
         $data->status_baca = null;
         $data->stand_ini = null;
         $data->tanggal_baca = null;
         $data->foto = null;
         $data->save();
+        $this->reset = null;
+    }
+
+    public function hapus()
+    {
+        BacaMeter::whereId($this->hapus)->delete();
         $this->hapus = null;
     }
 

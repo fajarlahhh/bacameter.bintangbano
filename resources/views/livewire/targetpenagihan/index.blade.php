@@ -67,6 +67,8 @@
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>Periode</th>
+                                <th>Stand Lalu</th>
+                                <th>Stand Ini</th>
                                 <th>Jumlah</th>
                                 <th>Denda</th>
                                 @if ($status == 1)
@@ -84,6 +86,8 @@
                                     <td class="align-middle">{{ $row->nama }}</td>
                                     <td class="align-middle">{{ $row->alamat }}</td>
                                     <td class="align-middle">{{ $row->periode }}</td>
+                                    <td class="align-middle">{{ $row->stand_lalu }}</td>
+                                    <td class="align-middle">{{ $row->stand_ini }}</td>
                                     <td class="align-middle">{{ $row->jumlah }}</td>
                                     <td class="align-middle">{{ $row->denda }}</td>
                                     @if ($status == 1)

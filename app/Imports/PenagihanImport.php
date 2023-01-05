@@ -23,8 +23,8 @@ class PenagihanImport implements ToModel, WithStartRow
             'nama' => $row[1],
             'alamat' => $row[2],
             'periode' => $row[3] . '-01',
-            'stand' => $row[4],
-            'pakai' => $row[5],
+            'stand_lalu' => $row[4],
+            'stand_ini' => $row[5],
             'jumlah' => $row[6],
         ]);
     }

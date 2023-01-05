@@ -5,8 +5,10 @@ namespace App\Exports;
 use App\Models\Tagihan;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class PenagihanExport implements FromCollection
+class PenagihanExport implements FromCollection, WithMapping, WithHeadings
 {
     public $cari, $status, $pembaca, $tahun, $bulan;
 

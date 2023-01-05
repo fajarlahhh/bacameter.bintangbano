@@ -35,7 +35,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
             $data->jumlah,
             $data->denda,
             $data->tanggal_tagih,
-            $data->petugas ? $data->petugas->nama : '',
+            $data->penagih ? $data->penagih->nama : '',
         ];
     }
 

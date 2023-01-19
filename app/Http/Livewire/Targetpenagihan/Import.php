@@ -24,7 +24,7 @@ class Import extends Component
         Excel::import(new PenagihanImport(auth()->id()), '/public/' . 'penagihan.' . $extension);
         Storage::delete('public/penagihan.' . $extension);
         session()->flash('success', 'Berhasil menyimpan data');
-        return redirect('/import');
+        return redirect('/targetpenagihan');
     }
     public function render()
     {

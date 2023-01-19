@@ -28,6 +28,14 @@ class PenagihanImport implements ToModel, WithStartRow
             'jumlah' => $row[6],
         ]);
     }
+    public function uniqueBy()
+    {
+        return ['no_langganan', 'periode'];
+    }
+    public function upsertColumns()
+    {
+        return ['no_langganan', 'periode'];
+    }
 
     public function startRow(): int
     {

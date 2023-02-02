@@ -24,9 +24,10 @@ class PembacaController extends Controller
             ]);
         }
 
-        $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->first();
+        $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
 
         if ($pembaca->count() > 0) {
+            $pembaca = $pembaca->first();
             if (!Hash::check($req->sandi, $pembaca->kata_sandi)) {
                 return response()->json([
                     'status' => 'gagal',

@@ -21,6 +21,12 @@
             <div class="card card-default">
                 <div class="card-header">
                     <div class="form-inline">
+                        <x-element.select attribute="wire:model=pembaca" style="warning">
+                            <option value="">-- Semua Petugas --</option>
+                            @foreach (\App\Models\Pembaca::orderBy('nama')->get() as $row)
+                                <option value="{{ $row->kode }}">{{ $row->nama }}</option>
+                            @endforeach
+                        </x-element.select>&nbsp;
                         <x-element.select attribute="wire:model=status" style="warning">
                             <option value="0">Belum Ditagih</option>
                             <option value="1">Tertagih</option>

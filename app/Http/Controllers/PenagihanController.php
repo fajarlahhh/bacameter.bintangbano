@@ -13,6 +13,7 @@ class PenagihanController extends Controller
     {
         $validator = Validator::make($req->all(), [
             'cari' => 'required',
+            'pembaca' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -23,7 +24,7 @@ class PenagihanController extends Controller
 
         return response()->json([
             'status' => 'sukses',
-            'data' => Tagihan::where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%')->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+            'data' => Tagihan::where('pembaca_kode', $req->pembaca)->where(fn($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat')->whereNull('tanggal_tagih')->with('tagihan')->get(),
         ]);
     }
 

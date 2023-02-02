@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/edit/{key}', \App\Http\Livewire\Pengguna\Form::class);
         });
     });
-    Route::prefix('pembaca')->group(function () {
+    Route::prefix('petugas')->group(function () {
         Route::get('/', \App\Http\Livewire\Pembaca\Index::class);
         Route::get('/tambah', \App\Http\Livewire\Pembaca\Form::class);
         Route::get('/edit/{key}', \App\Http\Livewire\Pembaca\Form::class);

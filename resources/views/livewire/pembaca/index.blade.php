@@ -21,7 +21,7 @@
             <div class="card card-default">
                 <div class="card-header">
                     <div class="form-inline">
-                        <a href="/pembaca/tambah" class="btn text-white btn-primary"><i class="fa fa-plus"></i>
+                        <a href="/petugas/tambah" class="btn text-white btn-primary"><i class="fa fa-plus"></i>
                             Tambah</a>&nbsp;
                         <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
                     </div>
@@ -50,7 +50,7 @@
                                                 <button wire:click="setKey"
                                                     class="btn text-white btn-success">Batal</button>
                                             @else
-                                                <a href="/pembaca/edit/{{ $row->getKey() }}"
+                                                <a href="/petugas/edit/{{ $row->getKey() }}"
                                                     class="btn text-white btn-info"><i
                                                         class="fas fa-sm fa-pencil-alt"></i></a>
                                                 <button wire:click="setKey({{ $row->getKey() }})"

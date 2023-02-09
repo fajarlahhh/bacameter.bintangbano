@@ -31,7 +31,6 @@ class Index extends Component
     public function ulangi()
     {
         $data = Tagihan::findOrFail($this->reset);
-        $data->pembaca_kode = null;
         $data->tanggal_tagih = null;
         $data->save();
         $this->reset = null;

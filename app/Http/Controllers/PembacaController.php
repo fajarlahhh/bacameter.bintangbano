@@ -24,7 +24,7 @@ class PembacaController extends Controller
             ]);
         }
 
-        $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
+        $pembaca = Pembaca::where('kode', $req->pembaca)->withoutGlobalScopes()->get();
 
         if ($pembaca->count() > 0) {
             $pembaca = $pembaca->first();

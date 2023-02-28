@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Petugas</h1>
+                    <h1 class="m-0">Cabang</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Petugas</li>
+                        <li class="breadcrumb-item active">Cabang</li>
                     </ol>
                 </div>
             </div>
@@ -21,9 +21,8 @@
             <div class="card card-default">
                 <div class="card-header">
                     <div class="form-inline">
-                        <a href="/petugas/tambah" class="btn text-white btn-primary"><i class="fa fa-plus"></i>
+                        <a href="/cabang/tambah" class="btn text-white btn-primary"><i class="fa fa-plus"></i>
                             Tambah</a>&nbsp;
-                        <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
                     </div>
                 </div>
                 <div class="card-body table-responsive">
@@ -32,8 +31,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama</th>
-                                <th>Username</th>
-                                <th>Cabang</th>
+                                <th>Kode</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -42,8 +40,7 @@
                                 <tr>
                                     <td class="align-middle">{{ ++$i }}</td>
                                     <td class="align-middle">{{ $row->nama }}</td>
-                                    <td class="align-middle">{{ $row->kode }}</td>
-                                    <td class="align-middle">{{ $row->cabang_id ? $row->cabang->nama: null }}</td>
+                                    <td class="align-middle">{{ $row->getKey() }}</td>
                                     <td class="with-btn-group align-middle text-right" nowrap>
                                         <div class="btn-group btn-group-sm" role="group">
                                             @if ($key === $row->getKey())
@@ -52,7 +49,7 @@
                                                 <button wire:click="setKey"
                                                     class="btn text-white btn-success">Batal</button>
                                             @else
-                                                <a href="/petugas/edit/{{ $row->getKey() }}"
+                                                <a href="/cabang/edit/{{ $row->getKey() }}"
                                                     class="btn text-white btn-info"><i
                                                         class="fas fa-sm fa-pencil-alt"></i></a>
                                                 <button wire:click="setKey({{ $row->getKey() }})"

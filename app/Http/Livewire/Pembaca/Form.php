@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class Form extends Component
 {
-    public $nama, $kode, $kataSandi, $back, $key, $data;
+    public $nama, $kode, $kataSandi, $back, $key, $data, $cabang;
 
     public function submit()
     {
@@ -25,6 +25,7 @@ class Form extends Component
         $this->data->nama = strtoupper($this->nama);
         $this->data->kata_sandi = Hash::make($this->kataSandi);
         $this->data->kode = $this->kode;
+        $this->data->cabang_id = $this->cabang;
         $this->data->save();
 
         session()->flash('success', 'Berhasil menyimpan data');
@@ -38,6 +39,7 @@ class Form extends Component
             $this->data = Pembaca::findOrFail($this->key);
             $this->nama = $this->data->nama;
             $this->kode = $this->data->kode;
+            $this->cabang = $this->data->cabang_id;
         } else {
             $this->data = new Pembaca();
         }

@@ -26,7 +26,7 @@ class PenagihanImport implements ToModel, WithStartRow
             'stand_lalu' => $row[4],
             'stand_ini' => $row[5],
             'jumlah' => $row[6],
-            'pembaca_kode' => $row[7],
+            'cabang_id' => $row[7],
         ]);
     }
     public function uniqueBy()

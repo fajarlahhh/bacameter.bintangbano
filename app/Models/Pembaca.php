@@ -11,4 +11,9 @@ class Pembaca extends Model
     use HasFactory, Pengguna;
 
     protected $table = 'pembaca';
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class);
+    }
 }

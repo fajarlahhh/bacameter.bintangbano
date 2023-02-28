@@ -31,7 +31,7 @@
                         <x-element.input type="password" id="kataSandi" attribute="wire:model.defer=kataSandi"
                             label="Kata Sandi" />
                         <div class="form-group">
-                            <label>Cabang</label>
+                            <label>Target Penagihan</label>
                             <select class="form-control " wire:model.defer="cabang" data-live-search="true"
                                 data-style="btn-info" data-width="100%">
                                 <option value="">Tidak Ada</option>

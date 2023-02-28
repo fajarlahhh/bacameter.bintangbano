@@ -33,7 +33,7 @@
                                 <th>No.</th>
                                 <th>Nama</th>
                                 <th>Username</th>
-                                <th>Cabang</th>
+                                <th>Target Penagihan</th>
                                 <th></th>
                             </tr>
                         </thead>

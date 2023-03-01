@@ -20,7 +20,7 @@ class Tagihan extends Model
         'periode',
         'stand_lalu',
         'stand_ini',
-        'pembaca_kode',
+        'cabang_id',
         'tanggal_tagih',
         'jumlah',
         'denda',

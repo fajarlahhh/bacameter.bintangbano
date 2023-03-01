@@ -108,7 +108,7 @@
                                         <td>
                                             @if ($hapus == $row->getKey())
                                                 <a href="javascript:;" wire:click="hapus" class="btn btn-danger">Ya,
-                                                    Ya, Hapus</a>
+                                                    Hapus</a>
                                                 <a href="javascript:;" wire:click="setHapus"
                                                     class="btn btn-success">Batal</a>
                                             @else

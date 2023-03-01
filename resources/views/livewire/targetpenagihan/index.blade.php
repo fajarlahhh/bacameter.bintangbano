@@ -92,7 +92,7 @@
                                     <td class="align-middle">{{ $row->denda }}</td>
                                     @if ($status == 1)
                                         <td class="align-middle">{{ $row->tanggal_tagih }}</td>
-                                        <td class="align-middle">{{ $row->penagih->nama }}</td>
+                                        <td class="align-middle">{{ $row->pembaca_kode }}</td>
                                         <td>
                                             @if ($reset == $row->getKey())
                                                 <a href="javascript:;" wire:click="ulangi" class="btn btn-danger">Ya,

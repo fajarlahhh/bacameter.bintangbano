@@ -15,4 +15,9 @@ class BacaMeter extends Model
     protected $fillable = [
         'pengguna_id', 'no_langganan', 'nama', 'alamat', 'periode', 'pembaca_kode',
     ];
+
+    public function pembaca()
+    {
+        return $this->belongsTo(Pembaca::class, 'pembaca_kode', 'kode');
+    }
 }

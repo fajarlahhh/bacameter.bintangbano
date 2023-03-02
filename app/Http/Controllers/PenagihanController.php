@@ -63,11 +63,11 @@ class PenagihanController extends Controller
         $tanggal = explode(' - ', $req->tanggal);
         $pengguna = Pembaca::where('kode', $req->petugas)->get();
 
-        if ($pengguna) {
+        if ($pengguna->count()>0) {
             $pengguna = $pengguna->first();
             return response()->json([
                 'status' => 'sukses',
-                'data' => Tagihan::when($pengguna->cabang_id, fn($q)=> $q->where('cabang_id', $pengguna->cabang_id))->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+                'data' => Tagihan::where('pembaca_kode', $req->petugas)->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
             ]);
         }else{
             return response()->json([

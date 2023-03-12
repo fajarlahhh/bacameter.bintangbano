@@ -92,7 +92,7 @@ class PenagihanController extends Controller
 
         try {
             Tagihan::whereIn('id', $req->id)->withoutGlobalScopes()->update([
-                'cabang_id' => $req->petugas,
+                'petugas_kode' => $req->petugas,
                 'tanggal_tagih' => now(),
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,

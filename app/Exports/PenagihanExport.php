@@ -23,7 +23,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
 
     public function collection()
     {
-        return Tagihan::with('penagih')->where(fn($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('pembaca_kode', 'tanggal_tagih', 'no_langganan', 'nama', 'alamat', 'jumlah', 'periode', DB::raw('if(date(DATE_ADD(NOW(), INTERVAL 1 HOUR)) > concat(SUBSTR(periode, 1, 8), "25"), 5000, 0) denda'), 'id')->when($this->status == 1, fn($q) => $q->whereNotNull('tanggal_tagih')->where('tanggal_tagih', 'like', $this->tahun . '-' . $this->bulan . '%'))->when($this->status == 0, fn($q) => $q->whereNull('tanggal_tagih'))->where('pembaca_kode', $this->pembaca)->get();
+        return Tagihan::with('penagih')->where(fn ($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('pembaca_kode', 'tanggal_tagih', 'no_langganan', 'nama', 'alamat', 'jumlah', 'periode', DB::raw('if(date(DATE_ADD(NOW(), INTERVAL 1 HOUR)) > concat(SUBSTR(periode, 1, 8), "25"), 5000, 0) denda'), 'id')->when($this->status == 1, fn ($q) => $q->whereNotNull('tanggal_tagih')->where('tanggal_tagih', 'like', $this->tahun . '-' . $this->bulan . '%'))->when($this->status == 0, fn ($q) => $q->whereNull('tanggal_tagih'))->where('pembaca_kode', $this->pembaca)->get();
     }
     public function map($data): array
     {
@@ -31,6 +31,8 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
             $data->no_langganan,
             $data->nama,
             $data->alamat,
+            $data->status,
+            $data->golongan,
             $data->periode,
             $data->stand_lalu,
             $data->stand_ini,
@@ -48,6 +50,8 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
                 'NO. LANGGANAN',
                 'NAMA',
                 'ALAMAT',
+                'STATUS',
+                'GOLONGAN',
                 'PERIODE',
                 'STAND LALU',
                 'STAND INI',
@@ -55,6 +59,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
                 'DENDA',
                 'TGL. TAGIH',
                 'PETUGAS',
-            ]];
+            ]
+        ];
     }
 }

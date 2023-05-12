@@ -22,17 +22,21 @@ class PenagihanImport implements ToModel, WithStartRow
             'no_langganan' => $row[0],
             'nama' => $row[1],
             'alamat' => $row[2],
-            'periode' => $row[3] . '-01',
-            'stand_lalu' => $row[4],
-            'stand_ini' => $row[5],
-            'jumlah' => $row[6],
-            'pembaca_kode' => $row[7],
+            'status' => $row[3],
+            'golongan' => $row[4],
+            'periode' => $row[5] . '-01',
+            'stand_lalu' => $row[6],
+            'stand_ini' => $row[7],
+            'jumlah' => $row[8],
+            'pembaca_kode' => $row[9],
         ]);
     }
+
     public function uniqueBy()
     {
         return ['no_langganan', 'periode'];
     }
+
     public function upsertColumns()
     {
         return ['no_langganan', 'periode'];

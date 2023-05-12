@@ -24,7 +24,7 @@ class PenagihanController extends Controller
 
         return response()->json([
             'status' => 'sukses',
-            'data' => Tagihan::where('pembaca_kode', $req->pembaca)->where(fn($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+            'data' => Tagihan::where('pembaca_kode', $req->pembaca)->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganFan')->select('no_langganan', 'nama', 'alamat')->whereNull('tanggal_tagih')->with('tagihan')->get(),
         ]);
     }
 
@@ -72,7 +72,7 @@ class PenagihanController extends Controller
                 'status' => 'sukses',
                 'data' => null,
             ]);
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'gagal',
                 'data' => $e->getMessage(),

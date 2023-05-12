@@ -31,7 +31,7 @@ class PenagihanController extends Controller
                 if ($pengguna->cabang_id) {
                     return response()->json([
                         'status' => 'sukses',
-                        'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id', 'golongan', 'status')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+                        'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
                     ]);
                 } else {
                     return response()->json([

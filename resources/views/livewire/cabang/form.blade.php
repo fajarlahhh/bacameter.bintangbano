@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Petugas</h1>
+                    <h1 class="m-0">Cabang</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Petugas</li>
+                        <li class="breadcrumb-item active">Cabang</li>
                     </ol>
                 </div>
             </div>
@@ -26,20 +26,6 @@
                     <div class="card-body">
                         <x-element.input type="text" id="nama" attribute="wire:model.defer=nama"
                             label="Nama" />
-                        <x-element.input type="text" id="kode" attribute="wire:model.defer=kode"
-                            label="Username" />
-                        <x-element.input type="password" id="kataSandi" attribute="wire:model.defer=kataSandi"
-                            label="Kata Sandi" />
-                        <div class="form-group">
-                            <label>Target Penagihan</label>
-                            <select class="form-control " wire:model.defer="cabang" data-live-search="true"
-                                data-style="btn-info" data-width="100%">
-                                <option value="">Tidak Ada</option>
-                                @foreach (\App\Models\Cabang::orderBy('nama')->get() as $row)
-                                    <option value="{{ $row->getKey() }}">{{ $row->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                     <div class="card-footer">
                         <input type="submit" value="Simpan" class="btn text-white btn-success m-r-3" />

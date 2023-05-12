@@ -67,6 +67,12 @@
                                 Petugas
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/cabang" class="nav-link  @if (strpos($currentUrl, '/cabang') === 0) active @endif">
+                                <i class="nav-icon fas fa-user-tag"></i>
+                                Cabang
+                            </a>
+                        </li>
                         @if (auth()->user()->level == 1)
                             <li class="nav-item">
                                 <a href="/pengguna" class="nav-link  @if (strpos($currentUrl, '/pengguna') === 0) active @endif">

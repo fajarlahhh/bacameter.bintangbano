@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembaca;
 use App\Models\Tagihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,10 +23,27 @@ class PenagihanController extends Controller
             ]);
         }
 
-        return response()->json([
-            'status' => 'sukses',
-            'data' => Tagihan::where('pembaca_kode', $req->pembaca)->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganFan')->select('no_langganan', 'nama', 'alamat')->whereNull('tanggal_tagih')->with('tagihan')->get(),
-        ]);
+        $pengguna = Pembaca::where('kode', $req->pembaca)->get();
+
+        if ($pengguna) {
+            $pengguna = $pengguna->first();
+            if ($pengguna->cabang_id) {
+                return response()->json([
+                    'status' => 'sukses',
+                    'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'gagal',
+                    'data' => 'Pengguna tidak ditemukan',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 'gagal',
+                'data' => 'Pengguna tidak ditemukan',
+            ]);
+        }
     }
 
     public function terbayar(Request $req)
@@ -42,10 +60,20 @@ class PenagihanController extends Controller
         }
 
         $tanggal = explode(' - ', $req->tanggal);
-        return response()->json([
-            'status' => 'sukses',
-            'data' => Tagihan::where('pembaca_kode', $req->petugas)->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
-        ]);
+        $pengguna = Pembaca::where('kode', $req->petugas)->get();
+
+        if ($pengguna->count() > 0) {
+            $pengguna = $pengguna->first();
+            return response()->json([
+                'status' => 'sukses',
+                'data' => Tagihan::where('pembaca_kode', $req->petugas)->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'gagal',
+                'data' => 'Pengguna tidak ditemukan',
+            ]);
+        }
     }
 
     public function lunasi(Request $req)

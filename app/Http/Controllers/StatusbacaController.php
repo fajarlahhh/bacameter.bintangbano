@@ -25,7 +25,7 @@ class StatusbacaController extends Controller
 
     $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
     if ($pembaca->count() > 0) {
-      $dataStatusBaca = StatusBaca::withoutGlobalScopes()->where('pengguna_id', $pembaca->first()->pengguna_id)->get();
+      $dataStatusBaca = StatusBaca::all();
       return response()->json([
         'status' => 'sukses',
         'data' => $dataStatusBaca,

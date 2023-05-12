@@ -23,7 +23,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
 
     public function collection()
     {
-        return Tagihan::with('penagih')->where(fn ($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('pembaca_kode', 'tanggal_tagih', 'no_langganan', 'nama', 'alamat', 'jumlah', 'periode', DB::raw('if(date(DATE_ADD(NOW(), INTERVAL 1 HOUR)) > concat(SUBSTR(periode, 1, 8), "25"), 5000, 0) denda'), 'id')->when($this->status == 1, fn ($q) => $q->whereNotNull('tanggal_tagih')->where('tanggal_tagih', 'like', $this->tahun . '-' . $this->bulan . '%'))->when($this->status == 0, fn ($q) => $q->whereNull('tanggal_tagih'))->where('pembaca_kode', $this->pembaca)->get();
+        return Tagihan::where(fn ($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('cabang_id', 'tanggal_tagih', 'stand_ini', 'stand_lalu', 'no_langganan', 'pembaca_kode', 'nama', 'alamat', 'jumlah', 'periode', DB::raw('if( date(  NOW()) > DATE_ADD( STR_TO_DATE(concat( SUBSTR( periode, 1, 8 ), "25" ), "%Y-%m-%d"), INTERVAL 1 MONTH), 5000, 0 ) denda'), 'id')->when($this->status == 1, fn ($q) => $q->whereNotNull('tanggal_tagih')->where('tanggal_tagih', 'like', $this->tahun . '-' . $this->bulan . '%'))->when($this->status == 0, fn ($q) => $q->whereNull('tanggal_tagih'))->when($this->pembaca, fn ($q) => $q->where('cabang_id', $this->pembaca))->get();
     }
     public function map($data): array
     {
@@ -39,7 +39,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
             $data->jumlah,
             $data->denda,
             $data->tanggal_tagih,
-            $data->penagih ? $data->penagih->nama : '',
+            $data->pembaca_kode,
         ];
     }
 
@@ -47,7 +47,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
     {
         return [
             [
-                'NO. LANGGANAN',
+                'NO. LANGFFGANAN',
                 'NAMA',
                 'ALAMAT',
                 'STATUS',

@@ -95,6 +95,7 @@
                                 <th>No. Langganan</th>
                                 <th>Nama</th>
                                 <th>Alamat</th>
+                                <th>Petugas</th>
                                 <th>Stand Ini</th>
                                 <th>Foto</th>
                                 <th>Status Baca</th>
@@ -111,6 +112,7 @@
                                     <td class="align-middle">{{ $row->no_langganan }}</td>
                                     <td class="align-middle">{{ $row->nama }}</td>
                                     <td class="align-middle">{{ $row->alamat }}</td>
+                                    <td class="align-middle">{{ $row->pembaca->nama }}</td>
                                     <td class="align-middle">{{ $row->stand_ini }}</td>
                                     <td class="align-middle">{!! $row->foto
                                         ? "<div class='zoom-without-container'><img src='" .

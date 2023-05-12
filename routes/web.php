@@ -35,6 +35,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/tambah', \App\Http\Livewire\Statusbaca\Form::class);
         Route::get('/edit/{key}', \App\Http\Livewire\Statusbaca\Form::class);
     });
+    Route::prefix('cabang')->group(function () {
+        Route::get('/', \App\Http\Livewire\Cabang\Index::class);
+        Route::get('/tambah', \App\Http\Livewire\Cabang\Form::class);
+        Route::get('/edit/{key}', \App\Http\Livewire\Cabang\Form::class);
+    });
     Route::prefix('targetbaca')->group(function () {
         Route::get('/', \App\Http\Livewire\Targetbaca\Index::class);
         Route::get('/import', \App\Http\Livewire\Targetbaca\Import::class);

@@ -22,7 +22,7 @@ class BacameterExport implements FromCollection, WithMapping, WithHeadings
   }
   public function collection()
   {
-    return BacaMeter::where(fn($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->when($this->status == 1, fn($q) => $q->whereNotNull('tanggal_baca'))->when($this->status == 0, fn($q) => $q->whereNull('tanggal_baca'))->when($this->statusBaca, fn($q) => $q->where('status_baca', $this->statusBaca))->when($this->pembaca, fn($q) => $q->where('pembaca_kode', $this->pembaca))->where('periode', $this->tahun . '-' . $this->bulan . '-01')->get();
+    return BacaMeter::with('pembaca')->where(fn($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->when($this->status == 1, fn($q) => $q->whereNotNull('tanggal_baca'))->when($this->status == 0, fn($q) => $q->whereNull('tanggal_baca'))->when($this->statusBaca, fn($q) => $q->where('status_baca', $this->statusBaca))->when($this->pembaca, fn($q) => $q->where('pembaca_kode', $this->pembaca))->where('periode', $this->tahun . '-' . $this->bulan . '-01')->get();
   }
   public function map($data): array
   {
@@ -30,6 +30,7 @@ class BacameterExport implements FromCollection, WithMapping, WithHeadings
       $data->no_langganan,
       $data->nama,
       $data->alamat,
+      $data->pembaca->nama,
       $data->pembaca_kode,
       $data->stand_ini,
       $data->tanggal_baca,
@@ -44,6 +45,7 @@ class BacameterExport implements FromCollection, WithMapping, WithHeadings
         'NO. LANGGANAN',
         'NAMA',
         'ALAMAT',
+        'PETUGAS',
         'KODE PEMBACA',
         'STAND INI',
         'TGL. BACA',

@@ -9,31 +9,31 @@ use Illuminate\Support\Facades\Validator;
 
 class StatusbacaController extends Controller
 {
-  //
-  public function index(Request $req)
-  {
-    $validator = Validator::make($req->all(), [
-      'pembaca' => 'required',
-    ]);
+    //
+    public function index(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'pembaca' => 'required',
+        ]);
 
-    if ($validator->fails()) {
-      return response()->json([
-        'status' => 'gagal',
-        'data' => $validator->messages(),
-      ]);
-    }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'gagal',
+                'data' => $validator->messages(),
+            ]);
+        }
 
-    $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
-    if ($pembaca->count() > 0) {
-      $dataStatusBaca = StatusBaca::all();
-      return response()->json([
-        'status' => 'sukses',
-        'data' => $dataStatusBaca,
-      ]);
+        $pembaca = Pembaca::where('uid', $req->pembaca)->withoutGlobalScopes()->get();
+        if ($pembaca->count() > 0) {
+            $dataStatusBaca = StatusBaca::all();
+            return response()->json([
+                'status' => 'sukses',
+                'data' => $dataStatusBaca,
+            ]);
+        }
+        return response()->json([
+            'status' => 'gagal',
+            'data' => 'Tidak ada data petugas',
+        ]);
     }
-    return response()->json([
-      'status' => 'gagal',
-      'data' => 'Tidak ada data petugas',
-    ]);
-  }
 }

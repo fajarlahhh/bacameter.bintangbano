@@ -114,11 +114,12 @@
                                     <td class="align-middle">{{ $row->alamat }}</td>
                                     <td class="align-middle">{{ $row->pembaca->nama }}</td>
                                     <td class="align-middle">{{ $row->stand_ini }}</td>
-                                    <td class="align-middle">{!! $row->foto
-                                        ? "<div class='zoom-without-container'><img src='" .
-                                            asset('/' . $row->foto) .
-                                            "'  alt='zoom' style='width:50px'></div>"
-                                        : null !!}
+                                    <td class="align-middle">
+                                        @if ($row->foto)
+                                            <div class='zoom-without-container'>
+                                                <img src='{{ Storage::url($row->foto) }}'  alt='zoom' style='width:50px'>
+                                            </div>
+                                        @endif
                                     </td>
                                     <td class="align-middle">{{ $row->status_baca }}</td>
                                     <td class="align-middle">{{ $row->tanggal_baca }}</td>

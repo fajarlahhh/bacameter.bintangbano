@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BacaMeter;
 use App\Models\Pembaca;
+use App\Models\BacaMeter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BacameterController extends Controller
@@ -51,22 +52,21 @@ class BacameterController extends Controller
         }
         try {
             $gambar = $req->file('file');
-            $extension = $gambar->getClientOriginalExtension();
-            $namaFile = date('YmdHims') . time() . uniqid() . '_' . $req->id;
-            $gambar->move(public_path('foto'), $namaFile . '.' . $extension);
+            $namaFile = date('YmdHims') . time() . uniqid() . '.' . $gambar->getClientOriginalExtension();
+            Storage::putFileAs('public/foto/', $gambar, $namaFile);
             BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
                 'stand_ini' => $req->stand,
                 'status_baca' => $req->status_baca,
                 'tanggal_baca' => $req->tanggal_baca,
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,
-                'foto' => 'foto/' . $namaFile . '.' . $extension,
+                'foto' => 'public/foto/' . $namaFile ,
             ]);
             return response()->json([
                 'status' => 'sukses',
                 'data' => null,
             ]);
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'gagal',
                 'data' => $e->getMessage(),

@@ -21,6 +21,8 @@ class Tagihan extends Model
         'stand_lalu',
         'stand_ini',
         'cabang_id',
+        'golongan',
+        'status',
         'tanggal_tagih',
         'jumlah',
         'denda',

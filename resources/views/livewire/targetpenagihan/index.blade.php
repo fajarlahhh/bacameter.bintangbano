@@ -67,6 +67,8 @@
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>Periode</th>
+                                <th>Status</th>
+                                <th>Golongan</th>
                                 <th>Stand Lalu</th>
                                 <th>Stand Ini</th>
                                 <th>Jumlah</th>
@@ -85,6 +87,8 @@
                                     <td class="align-middle">{{ $row->no_langganan }}</td>
                                     <td class="align-middle">{{ $row->nama }}</td>
                                     <td class="align-middle">{{ $row->alamat }}</td>
+                                    <td class="align-middle">{{ $row->status }}</td>
+                                    <td class="align-middle">{{ $row->golongan }}</td>
                                     <td class="align-middle">{{ $row->periode }}</td>
                                     <td class="align-middle">{{ $row->stand_lalu }}</td>
                                     <td class="align-middle">{{ $row->stand_ini }}</td>

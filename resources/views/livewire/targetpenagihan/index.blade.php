@@ -66,9 +66,9 @@
                                 <th>No. Langganan</th>
                                 <th>Nama</th>
                                 <th>Alamat</th>
-                                <th>Periode</th>
                                 <th>Status</th>
                                 <th>Golongan</th>
+                                <th>Periode</th>
                                 <th>Stand Lalu</th>
                                 <th>Stand Ini</th>
                                 <th>Jumlah</th>

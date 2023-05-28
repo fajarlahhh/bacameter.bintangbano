@@ -31,7 +31,7 @@ class PenagihanController extends Controller
                 if ($pengguna->cabang_id) {
                     return response()->json([
                         'status' => 'sukses',
-                        'data' => Tagihan::where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+                        'data' => Tagihan::when($pengguna->cabang_id, fn($q)=> $q->where('cabang_id', $pengguna->cabang_id))->where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
                     ]);
                 } else {
                     return response()->json([
@@ -73,7 +73,7 @@ class PenagihanController extends Controller
             $pengguna = $pengguna->first();
             return response()->json([
                 'status' => 'sukses',
-                'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+                'data' => Tagihan::where('pembaca_kode', $req->petugas)->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
             ]);
         } else {
             return response()->json([

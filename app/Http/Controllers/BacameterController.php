@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pembaca;
 use App\Models\BacaMeter;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class BacameterController extends Controller
 {
@@ -54,18 +54,19 @@ class BacameterController extends Controller
         try {
             $gambar = $req->file('file');
             $namaFile = date('YmdHims') . time() . uniqid() . '.jpg';
-            Image::make($gambar)->encode('jpg', 0)->resize(300, null, function ($c) {
+            $file = Image::make($gambar)->encode('jpg', 0)->resize(300, null, function ($c) {
                 $c->aspectRatio();
                 $c->upsize();
-            })->save('public/foto/' . $namaFile, 60);
-            // Storage::putFileAs('public/foto/', $gambar, $namaFile);
+            });
+            Storage::put('public/foto/' . $namaFile, $file->stream());
+            //Storage::putFileAs('public/foto/', $gambar, $namaFile);
             BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
                 'stand_ini' => $req->stand,
                 'status_baca' => $req->status_baca,
                 'tanggal_baca' => $req->tanggal_baca,
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,
-                'foto' => 'public/foto/' . $namaFile,
+                'foto' => 'public/foto/' . $namaFile ,
             ]);
             return response()->json([
                 'status' => 'sukses',

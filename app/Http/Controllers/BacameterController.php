@@ -58,7 +58,7 @@ class BacameterController extends Controller
                 $c->aspectRatio();
                 $c->upsize();
             });
-            Storage::put('public/foto/' . $namaFile, $file->stream());
+            Storage::put('public/foto2/' . $namaFile, $file->stream());
             //Storage::putFileAs('public/foto/', $gambar, $namaFile);
             BacaMeter::where('id', $req->id)->withoutGlobalScopes()->update([
                 'stand_ini' => $req->stand,
@@ -66,7 +66,7 @@ class BacameterController extends Controller
                 'tanggal_baca' => $req->tanggal_baca,
                 'latitude' => $req->latitude,
                 'longitude' => $req->longitude,
-                'foto' => 'public/foto/' . $namaFile ,
+                'foto' => 'public/foto2/' . $namaFile ,
             ]);
             return response()->json([
                 'status' => 'sukses',

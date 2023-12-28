@@ -117,7 +117,7 @@
                                     <td class="align-middle">
                                         @if ($row->foto)
                                             <div class='zoom-without-container'>
-                                                <img src='{{ str_contains($row->foto, 'foto2') ? Storage::url($row->foto) : str_replace('public/', 'https://vegastech.site/', $row->foto) }}'
+                                                <img src='{{ Storage::url($row->foto) }}'
                                                     alt='zoom' style='width:50px'>
                                             </div>
                                         @endif

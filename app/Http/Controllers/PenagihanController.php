@@ -73,7 +73,7 @@ class PenagihanController extends Controller
             $pengguna = $pengguna->first();
             return response()->json([
                 'status' => 'sukses',
-                'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
+                'data' => Tagihan::when($pengguna->cabang_id, fn ($q) => $q->where('cabang_id', $pengguna->cabang_id))->where('pembaca_kode', $pengguna->kode)->whereBetween('tanggal_tagih', [$tanggal[0] . ' 00:00:00', $tanggal[1] . ' 23:59:59'])->get(),
             ]);
         } else {
             return response()->json([

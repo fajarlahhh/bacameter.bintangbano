@@ -24,14 +24,14 @@ class PenagihanController extends Controller
         }
 
         $pengguna = Pembaca::where('kode', $req->pembaca)->get();
-
+        
         if ($pengguna) {
             $pengguna = $pengguna->first();
             if ($pengguna) {
                 if ($pengguna->cabang_id) {
                     return response()->json([
                         'status' => 'sukses',
-                        'data' => Tagihan::where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->where('cabang_id', $pengguna->cabang_id)->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
+                        'data' => Tagihan::where(fn ($q) => $q->where('nama', 'like', '%' . $req->cari . '%')->orWhere('no_langganan', 'like', '%' . $req->cari . '%'))->where('cabang_id', $pengguna->cabang_id)->groupBy('no_langganan')->select('no_langganan', 'nama', 'alamat', 'cabang_id')->whereNull('tanggal_tagih')->with('tagihan')->get(),
                     ]);
                 } else {
                     return response()->json([

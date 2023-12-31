@@ -10,20 +10,20 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class PenagihanExport implements FromCollection, WithMapping, WithHeadings
 {
-    public $cari, $status, $pembaca, $tahun, $bulan;
+    public $cari, $status, $pembaca, $tanggal1, $tanggal2;
 
-    public function __construct($cari, $status, $pembaca, $tahun, $bulan)
+    public function __construct($cari, $status, $pembaca, $tanggal1, $tanggal2)
     {
         $this->cari = $cari;
         $this->status = $status;
         $this->pembaca = $pembaca;
-        $this->tahun = $tahun;
-        $this->bulan = $bulan;
+        $this->tanggal1 = $tanggal1;
+        $this->tanggal2 = $tanggal2;
     }
 
     public function collection()
     {
-        return Tagihan::where(fn ($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('cabang_id', 'golongan', 'status', 'tanggal_tagih', 'stand_ini', 'stand_lalu', 'no_langganan', 'pembaca_kode', 'nama', 'alamat', 'jumlah', 'periode', 'denda', 'id')->when($this->status == 1, fn ($q) => $q->whereNotNull('tanggal_tagih')->where('tanggal_tagih', 'like', $this->tahun . '-' . $this->bulan . '%'))->when($this->status == 0, fn ($q) => $q->whereNull('tanggal_tagih'))->when($this->pembaca, fn ($q) => $q->where('cabang_id', $this->pembaca))->get();
+        return Tagihan::where(fn ($q) => $q->where('no_langganan', 'like', '%' . $this->cari . '%')->orWhere('nama', 'like', '%' . $this->cari . '%'))->select('cabang_id', 'golongan', 'status', 'tanggal_tagih', 'stand_ini', 'stand_lalu', 'no_langganan', 'pembaca_kode', 'nama', 'alamat', 'jumlah', 'periode', 'denda', 'id')->when($this->status == 1, fn ($q) => $q->whereNotNull('tanggal_tagih')->whereBetween('tanggal_tagih', [$this->tanggal1 . ' 00:00:00', $this->tanggal2 . ' 23:59:59']))->when($this->status == 0, fn ($q) => $q->whereNull('tanggal_tagih'))->when($this->pembaca, fn ($q) => $q->where('cabang_id', $this->pembaca))->get();
     }
     public function map($data): array
     {
@@ -47,7 +47,7 @@ class PenagihanExport implements FromCollection, WithMapping, WithHeadings
     {
         return [
             [
-                'NO. LANGFFGANAN',
+                'NO. LANGGANAN',
                 'NAMA',
                 'ALAMAT',
                 'STATUS',

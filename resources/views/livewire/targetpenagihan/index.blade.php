@@ -34,22 +34,13 @@
                         &nbsp;
                         @if ($status == 1)
                             <div class="form-group">
-                                <select class="form-control " wire:model="bulan" data-live-search="true"
-                                    data-style="btn-info" data-width="100%">
-                                    @for ($i = 1; $i <= 12; $i++)
-                                        <option value="{{ sprintf('%02s', $i) }}">
-                                            {{ DateTime::createFromFormat('!m', $i)->format('F') }}
-                                        </option>
-                                    @endfor
-                                </select>
+                                <input class="form-control" type="date" autocomplete="off" wire:model="tanggal1"
+                                    name="tanggal1" />
                             </div>&nbsp;
                             <div class="form-group">
-                                <select class="form-control " wire:model="tahun" data-live-search="true"
-                                    data-style="btn-info" data-width="100%">
-                                    @for ($i = 2016; $i <= date('Y'); $i++)
-                                        <option value="{{ $i }}">{{ $i }}</option>
-                                    @endfor
-                                </select>
+                                <label> s/d</label>&nbsp;
+                                <input class="form-control" type="date" autocomplete="off" wire:model="tanggal2"
+                                    name="tanggal2" />
                             </div>&nbsp;
                         @endif
                         <x-element.input type="text" attribute="wire:model.lazy=cari" placeholder="Pencarian" />
